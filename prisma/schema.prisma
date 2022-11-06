@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,69 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+// ER図作成用
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "ERD.svg"
+  theme    = "forest"
+}
+
+// 生徒
+model Student {
+  id           Int        @id @default(autoincrement())
+  name         String
+  age          Int
+  profile      Profile? // one To one
+  reports      Report[] // one To Many
+  departmentId Int // one To Many
+  department   Department @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+// プロフィール
+model Profile {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  grade     Grade   @default(FRESHMAN)
+  studentId Int     @unique
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+// レポート
+model Report {
+  id       Int      @id @default(autoincrement())
+  title    String
+  finished Boolean  @default(false)
+  authorId Int?
+  author   Student? @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+// 学部
+model Faculty {
+  id          Int          @id @default(autoincrement())
+  facultyName String       @unique
+  department  Department[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+// 学科
+model Department {
+  id             Int       @id @default(autoincrement())
+  departmentName String    @unique
+  student        Student[]
+  facultyId      Int
+  faculty        Faculty   @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+enum Grade {
+  FRESHMAN
+  SOPHOMORE
+  JUNIOR
+  SENIOR
 }

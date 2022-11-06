@@ -84,4 +84,6 @@ yarn add class-validator class-transformer
 
 nest g module prisma
 nest g service prisma --no-spec
+
+yarn add -D prisma-erd-generator @mermaid-js/mermaid-cli
 ```
