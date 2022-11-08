@@ -17,8 +17,8 @@ generator erd {
 // 生徒
 model Student {
   id           Int        @id @default(autoincrement())
-  name         String
-  age          Int
+  originalId   String
+  grade        Grade      @default(FRESHMAN)
   profile      Profile? // one To one
   reports      Report[] // one To Many
   departmentId Int // one To Many
@@ -29,20 +29,24 @@ model Student {
 
 // プロフィール
 model Profile {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
-  grade     Grade   @default(FRESHMAN)
-  studentId Int     @unique
-  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  studentId Int      @unique
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // レポート
 model Report {
-  id       Int      @id @default(autoincrement())
-  title    String
-  finished Boolean  @default(false)
-  authorId Int?
-  author   Student? @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  title     String
+  finished  Boolean  @default(false)
+  studentId Int
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // 学部
