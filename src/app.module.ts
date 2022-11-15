@@ -7,6 +7,7 @@ import { StudentService } from './student/student.service';
 import { StudentModule } from './student/student.module';
 import { ReportModule } from './report/report.module';
 import { FacultyModule } from './faculty/faculty.module';
+import { DepartmentModule } from './department/department.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { FacultyModule } from './faculty/faculty.module';
     StudentModule,
     ReportModule,
     FacultyModule,
+    DepartmentModule,
   ],
   controllers: [AppController],
   providers: [AppService, StudentService],

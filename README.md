@@ -87,3 +87,9 @@ nest g service prisma --no-spec
 
 yarn add -D prisma-erd-generator @mermaid-js/mermaid-cli
 ```
+
+### JavaScript heap out of memory (default: 1400MB)
+
+```bash
+--max-old-space-size=3000
+```
