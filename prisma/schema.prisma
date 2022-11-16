@@ -10,7 +10,7 @@ datasource db {
 // ER図作成用
 generator erd {
   provider = "prisma-erd-generator"
-  output   = "ERD.svg"
+  output   = "ERD.png"
   theme    = "forest"
 }
 
