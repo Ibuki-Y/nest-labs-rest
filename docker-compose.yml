@@ -1,7 +1,12 @@
 version: '3.9'
+
+volumes:
+  db-data:
+
 services:
   postgres:
     image: 'postgres:latest'
+    container_name: rest-db
     ports:
       - 5434:5432
     environment:
@@ -11,5 +16,8 @@ services:
     restart: always
     networks:
       - nestjs
+    volumes:
+      - db-data:/var/lib/postgresql/rest-db/data
+
 networks:
   nestjs:
