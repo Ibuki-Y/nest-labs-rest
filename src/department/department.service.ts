@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class DepartmentService {
   constructor(private prisma: PrismaService) {}
 
-  getDepartments(): Promise<Department[]> {
+  async getDepartments(): Promise<Department[]> {
     return this.prisma.department.findMany();
   }
 }

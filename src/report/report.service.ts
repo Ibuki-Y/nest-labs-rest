@@ -6,11 +6,11 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ReportService {
   constructor(private prisma: PrismaService) {}
 
-  getReports(): Promise<Report[]> {
+  async getReports(): Promise<Report[]> {
     return this.prisma.report.findMany();
   }
 
-  getStudentById(id: number): Promise<Report> {
+  async getReportById(id: number): Promise<Report> {
     return this.prisma.report.findFirst({
       where: {
         id,

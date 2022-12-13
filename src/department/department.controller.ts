@@ -7,7 +7,7 @@ export class DepartmentController {
   constructor(private departmentService: DepartmentService) {}
 
   @Get()
-  getDepartments(): Promise<Department[]> {
+  async getDepartments(): Promise<Department[]> {
     return this.departmentService.getDepartments();
   }
 }

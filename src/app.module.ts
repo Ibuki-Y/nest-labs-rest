@@ -8,6 +8,7 @@ import { StudentModule } from './student/student.module';
 import { ReportModule } from './report/report.module';
 import { FacultyModule } from './faculty/faculty.module';
 import { DepartmentModule } from './department/department.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { DepartmentModule } from './department/department.module';
     ReportModule,
     FacultyModule,
     DepartmentModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService, StudentService],

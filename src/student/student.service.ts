@@ -1,28 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { Grade, Profile, Student } from '@prisma/client';
+import { Profile, Student } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class StudentService {
   constructor(private prisma: PrismaService) {}
 
-  getStudents(): Promise<Student[]> {
+  async getStudents(): Promise<Student[]> {
     return this.prisma.student.findMany();
   }
 
-  getStudentProfiles(): Promise<Profile[]> {
+  async getStudentProfiles(): Promise<Profile[]> {
     return this.prisma.profile.findMany();
   }
 
-  getStudentByGrade(grade: Grade): Promise<Student[]> {
-    return this.prisma.student.findMany({
-      where: {
-        grade,
-      },
-    });
-  }
+  // async getStudentByGrade(grade: Grade): Promise<Student[]> {
+  //   return this.prisma.student.findMany({
+  //     where: {
+  //       grade,
+  //     },
+  //   });
+  // }
 
-  getStudentById(id: number): Promise<Student> {
+  async getStudentById(id: number): Promise<Student> {
     return this.prisma.student.findFirst({
       where: {
         id,
@@ -30,7 +30,7 @@ export class StudentService {
     });
   }
 
-  getStudentProfileById(id: number): Promise<Profile> {
+  async getStudentProfileById(id: number): Promise<Profile> {
     return this.prisma.profile.findFirst({
       where: {
         id,

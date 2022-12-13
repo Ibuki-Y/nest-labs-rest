@@ -7,7 +7,7 @@ export class FacultyController {
   constructor(private facultyService: FacultyService) {}
 
   @Get()
-  getFaculties(): Promise<Faculty[]> {
+  async getFaculties(): Promise<Faculty[]> {
     return this.facultyService.getFaculties();
   }
 }

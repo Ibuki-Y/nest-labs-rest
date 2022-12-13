@@ -7,12 +7,12 @@ export class ReportController {
   constructor(private reportService: ReportService) {}
 
   @Get()
-  getStudents(): Promise<Report[]> {
+  async getReports(): Promise<Report[]> {
     return this.reportService.getReports();
   }
 
   @Get(':id')
-  getStudentById(@Param('id', ParseIntPipe) id: number): Promise<Report> {
-    return this.reportService.getStudentById(id);
+  async getReportById(@Param('id', ParseIntPipe) id: number): Promise<Report> {
+    return this.reportService.getReportById(id);
   }
 }
