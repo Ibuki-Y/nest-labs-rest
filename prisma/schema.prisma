@@ -53,7 +53,7 @@ model Report {
 model Faculty {
   id          Int          @id @default(autoincrement())
   facultyName String       @unique
-  department  Department[]
+  departments Department[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -62,7 +62,7 @@ model Faculty {
 model Department {
   id             Int       @id @default(autoincrement())
   departmentName String    @unique
-  student        Student[]
+  students       Student[]
   facultyId      Int
   faculty        Faculty   @relation(fields: [facultyId], references: [id], onDelete: Cascade)
   createdAt      DateTime  @default(now())
