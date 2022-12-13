@@ -9,4 +9,12 @@ export class DepartmentService {
   async getDepartments(): Promise<Department[]> {
     return this.prisma.department.findMany();
   }
+
+  async getDepartmentById(id: number): Promise<Department> {
+    return this.prisma.department.findFirst({
+      where: {
+        id,
+      },
+    });
+  }
 }
