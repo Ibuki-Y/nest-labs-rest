@@ -11,7 +11,7 @@ export class ReportService {
   }
 
   async getReportById(id: number): Promise<Report> {
-    return this.prisma.report.findFirst({
+    return this.prisma.report.findUnique({
       where: {
         id,
       },

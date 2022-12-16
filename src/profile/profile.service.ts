@@ -11,7 +11,7 @@ export class ProfileService {
   }
 
   async getProfileById(id: number): Promise<Profile> {
-    return this.prisma.profile.findFirst({
+    return this.prisma.profile.findUnique({
       where: {
         id,
       },

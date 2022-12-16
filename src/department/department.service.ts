@@ -11,7 +11,7 @@ export class DepartmentService {
   }
 
   async getDepartmentById(id: number): Promise<Department> {
-    return this.prisma.department.findFirst({
+    return this.prisma.department.findUnique({
       where: {
         id,
       },

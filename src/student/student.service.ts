@@ -19,7 +19,7 @@ export class StudentService {
   }
 
   async getStudentById(id: number): Promise<Student> {
-    return this.prisma.student.findFirst({
+    return this.prisma.student.findUnique({
       where: {
         id,
       },
