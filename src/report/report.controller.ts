@@ -15,4 +15,11 @@ export class ReportController {
   async getReportById(@Param('id', ParseIntPipe) id: number): Promise<Report> {
     return this.reportService.getReportById(id);
   }
+
+  @Get('student/:id')
+  async getReportsByStudnetId(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Report[] | null> {
+    return this.reportService.getReportsByStudnetId(id);
+  }
 }

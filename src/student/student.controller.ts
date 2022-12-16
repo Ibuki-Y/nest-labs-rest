@@ -1,25 +1,24 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
-import { Profile, Student } from '@prisma/client';
+import { Profile, Student, Grade } from '@prisma/client';
 import { StudentService } from './student.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Controller('student')
 export class StudentController {
-  constructor(private studentService: StudentService) {}
+  constructor(
+    private studentService: StudentService,
+    private profileService: ProfileService,
+  ) {}
 
   @Get()
   async getStudents(): Promise<Student[]> {
     return this.studentService.getStudents();
   }
 
-  @Get('profile')
-  async getStudentProfiles(): Promise<Profile[]> {
-    return this.studentService.getStudentProfiles();
+  @Get('grade/:grade')
+  async getStudentByGrade(@Param('grade') grade: Grade): Promise<Student[]> {
+    return this.studentService.getStudentByGrade(grade);
   }
-
-  // @Get(':grade')
-  // async getStudentByGrade(@Param('grade') grade: Grade): Promise<Student[]> {
-  //   return this.studentService.getStudentByGrade(grade);
-  // }
 
   @Get(':id')
   async getStudentById(
@@ -32,6 +31,6 @@ export class StudentController {
   async getStudentProfileById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Profile> {
-    return this.studentService.getStudentProfileById(id);
+    return this.profileService.getProfileById(id);
   }
 }

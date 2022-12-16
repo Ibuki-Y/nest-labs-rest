@@ -17,4 +17,12 @@ export class ReportService {
       },
     });
   }
+
+  async getReportsByStudnetId(id: number): Promise<Report[] | null> {
+    return this.prisma.report.findMany({
+      where: {
+        studentId: id,
+      },
+    });
+  }
 }

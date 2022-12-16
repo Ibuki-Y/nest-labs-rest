@@ -7,12 +7,14 @@ export class ProfileController {
   constructor(private profileService: ProfileService) {}
 
   @Get()
-  async getReports(): Promise<Profile[]> {
+  async getProfiles(): Promise<Profile[]> {
     return this.profileService.getProfiles();
   }
 
   @Get(':id')
-  async getReportById(@Param('id', ParseIntPipe) id: number): Promise<Profile> {
+  async getProfileById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Profile> {
     return this.profileService.getProfileById(id);
   }
 }
