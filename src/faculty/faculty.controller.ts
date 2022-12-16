@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { Faculty } from '@prisma/client';
 import { FacultyService } from './faculty.service';
 
@@ -9,5 +9,12 @@ export class FacultyController {
   @Get()
   async getFaculties(): Promise<Faculty[]> {
     return this.facultyService.getFaculties();
+  }
+
+  @Get(':id')
+  async getFacultyById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Faculty> {
+    return this.facultyService.getFacultyById(id);
   }
 }

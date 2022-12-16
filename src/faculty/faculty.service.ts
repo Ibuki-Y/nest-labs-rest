@@ -9,4 +9,12 @@ export class FacultyService {
   async getFaculties(): Promise<Faculty[]> {
     return this.prisma.faculty.findMany();
   }
+
+  async getFacultyById(id: number): Promise<Faculty> {
+    return this.prisma.faculty.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }
