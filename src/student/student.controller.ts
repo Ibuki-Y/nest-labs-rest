@@ -12,7 +12,11 @@ export class StudentController {
 
   @Get()
   async getStudents(): Promise<Student[]> {
-    return this.studentService.getStudents();
+    const start = performance.now();
+    const students = this.studentService.getStudents();
+    const end = performance.now();
+    console.log(`getStudents: ${end - start}`);
+    return students;
   }
 
   @Get('grade/:grade')
@@ -24,7 +28,11 @@ export class StudentController {
   async getStudentById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Student> {
-    return this.studentService.getStudentById(id);
+    const start = performance.now();
+    const student = this.studentService.getStudentById(id);
+    const end = performance.now();
+    console.log(`getStudentById: ${end - start}`);
+    return student;
   }
 
   @Get('profile/:id')

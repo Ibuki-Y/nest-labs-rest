@@ -8,12 +8,20 @@ export class ReportController {
 
   @Get()
   async getReports(): Promise<Report[]> {
-    return this.reportService.getReports();
+    const start = performance.now();
+    const reports = this.reportService.getReports();
+    const end = performance.now();
+    console.log(`getReports: ${end - start}`);
+    return reports;
   }
 
   @Get(':id')
   async getReportById(@Param('id', ParseIntPipe) id: number): Promise<Report> {
-    return this.reportService.getReportById(id);
+    const start = performance.now();
+    const report = this.reportService.getReportById(id);
+    const end = performance.now();
+    console.log(`getReportById: ${end - start}`);
+    return report;
   }
 
   @Get('student/:id')

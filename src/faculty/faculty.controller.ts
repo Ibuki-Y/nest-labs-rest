@@ -8,13 +8,21 @@ export class FacultyController {
 
   @Get()
   async getFaculties(): Promise<Faculty[]> {
-    return this.facultyService.getFaculties();
+    const start = performance.now();
+    const faculties = this.facultyService.getFaculties();
+    const end = performance.now();
+    console.log(`getFaculties: ${end - start}`);
+    return faculties;
   }
 
   @Get(':id')
   async getFacultyById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Faculty> {
-    return this.facultyService.getFacultyById(id);
+    const start = performance.now();
+    const faculty = this.facultyService.getFacultyById(id);
+    const end = performance.now();
+    console.log(`getFacultyById: ${end - start}`);
+    return faculty;
   }
 }

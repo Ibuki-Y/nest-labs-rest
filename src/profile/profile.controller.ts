@@ -8,13 +8,21 @@ export class ProfileController {
 
   @Get()
   async getProfiles(): Promise<Profile[]> {
-    return this.profileService.getProfiles();
+    const start = performance.now();
+    const profiles = this.profileService.getProfiles();
+    const end = performance.now();
+    console.log(`getProfiles: ${end - start}`);
+    return profiles;
   }
 
   @Get(':id')
   async getProfileById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Profile> {
-    return this.profileService.getProfileById(id);
+    const start = performance.now();
+    const profile = this.profileService.getProfileById(id);
+    const end = performance.now();
+    console.log(`getProfileById: ${end - start}`);
+    return profile;
   }
 }

@@ -8,13 +8,21 @@ export class DepartmentController {
 
   @Get()
   async getDepartments(): Promise<Department[]> {
-    return this.departmentService.getDepartments();
+    const start = performance.now();
+    const departments = this.departmentService.getDepartments();
+    const end = performance.now();
+    console.log(`getDepartments: ${end - start}`);
+    return departments;
   }
 
   @Get(':id')
   async getDepartmentById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Department> {
-    return this.departmentService.getDepartmentById(id);
+    const start = performance.now();
+    const department = this.departmentService.getDepartmentById(id);
+    const end = performance.now();
+    console.log(`getDepartmentById: ${end - start}`);
+    return department;
   }
 }
