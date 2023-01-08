@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,6 +9,7 @@ import { ReportModule } from './report/report.module';
 import { FacultyModule } from './faculty/faculty.module';
 import { DepartmentModule } from './department/department.module';
 import { ProfileModule } from './profile/profile.module';
+import { ResponseTimeMiddleware } from './logger.middleware';
 
 @Module({
   imports: [
@@ -21,6 +22,10 @@ import { ProfileModule } from './profile/profile.module';
     ProfileModule,
   ],
   controllers: [AppController],
-  providers: [AppService, StudentService],
+  providers: [AppService, StudentService, ResponseTimeMiddleware],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(ResponseTimeMiddleware).forRoutes('');
+  }
+}
