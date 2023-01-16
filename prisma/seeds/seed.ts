@@ -9,7 +9,7 @@ import {
 } from './data';
 
 const prisma = new PrismaClient();
-const N = 100000;
+const N = 1000000;
 const createdAt = new Date('2022-01-31T04:34:22+09:00');
 const updatedAt = new Date('2022-01-31T04:34:22+09:00');
 
@@ -153,11 +153,11 @@ const doSeedReport = async () => {
 
 const main = async () => {
   console.log(`Start seeding ...`);
-  // await doSeedFaculty();
+  await doSeedFaculty();
   // await doSeedDepartment();
   // await doSeedStudent();
   // await doSeedProfile();
-  await doSeedReport();
+  // await doSeedReport();
   console.log(`Seeding finished.`);
 };
 
@@ -167,5 +167,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect;
+    await prisma.$disconnect();
   });
